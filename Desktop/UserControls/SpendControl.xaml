@@ -1,0 +1,755 @@
+﻿<UserControl x:Class="Desktop.UserControls.SpendControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Desktop.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:helper="clr-namespace:Desktop.Helper"
+             mc:Ignorable="d" 
+             >
+    <ScrollViewer>
+
+
+
+        <GroupBox  Grid.Column="0" Header="ব্যায়ের রশিদ বুক" FontSize="18" Margin="8">
+            <materialDesign:Card  Margin="5" >
+                <StackPanel Margin="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition  Height="Auto"/>
+                            <RowDefinition  Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions >
+                        <DatePicker x:Name="txtDate" Grid.Column="0" Grid.Row="0" FontSize="20" Margin="5" materialDesign:HintAssist.Hint="তারিখ"
+                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" >
+                            <DatePicker.SelectedDate>
+                                <Binding Path="Date" UpdateSourceTrigger="PropertyChanged">
+
+                                    <Binding.ValidationRules>
+                                        <helper:NotEmptyValidationRule  ValidatesOnTargetUpdated="True" />
+                                    </Binding.ValidationRules>
+
+                                </Binding>
+                            </DatePicker.SelectedDate>
+                        </DatePicker>
+
+                        <TextBox  x:Name="txtbookno" Grid.Column="1" Grid.Row="0" FontSize="20" Margin="5" materialDesign:HintAssist.Hint="বুক নং"
+                          Style="{StaticResource MaterialDesignTextFieldBoxTextBox}" 
+                          >
+                            <TextBox.Text>
+                                <Binding Path="BookNo" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <helper:NotEmptyValidationRule  ValidatesOnTargetUpdated="True" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="txtReciptNo" Grid.Column="2" FontSize="20" Margin="5" Grid.Row="0"  materialDesign:HintAssist.Hint="রশিদ নং"
+                          Style="{StaticResource MaterialDesignTextFieldBoxTextBox}" 
+                         >
+                            <TextBox.Text >
+                                <Binding Path="ReciptNO" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <helper:NotEmptyValidationRule  ValidatesOnTargetUpdated="True" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+
+                        <TextBox x:Name="txtName"  Grid.Column="0" FontSize="20" Margin="5"   Grid.Row="1" Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
+                           materialDesign:HintAssist.Hint="নাম"  >
+                            <TextBox.Text>
+                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <helper:NotEmptyValidationRule  ValidatesOnTargetUpdated="True" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+
+                        <TextBox  x:Name="txtAddress" Grid.Column="1" FontSize="20" Grid.ColumnSpan="2"  Margin="5" Grid.Row="1"
+                             Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
+                             materialDesign:HintAssist.Hint="ঠিকানা" >
+                            <TextBox.Text>
+                                <Binding Path="Address" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <helper:NotEmptyValidationRule  ValidatesOnTargetUpdated="True" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox >
+
+                        <ComboBox  x:Name="cmbSpendSource" materialDesign:HintAssist.Hint="ব্যায় নির্বাচন" Grid.Column="0" FontSize="20"  Margin="5" Grid.Row="2"
+                                SelectedValuePath="SpendSourceId"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+
+
+                            <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Path=SpendSourceId}"/>
+                                    <TextBlock Text="-"/>
+                                    <TextBlock Text="{Binding Path=Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                           
+                        </ComboBox.ItemTemplate>
+
+
+                            <ComboBox.Text>
+                                <Binding Path="SpendSoruces" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <helper:NotEmptyValidationRule  ValidatesOnTargetUpdated="True" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </ComboBox.Text>
+                        </ComboBox>
+
+                        <TextBox x:Name="txtDescription" Grid.Column="1" FontSize="20"  Margin="5" Grid.Row="2"  materialDesign:HintAssist.Hint="বিবরণ"
+                         Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
+                        >
+                            <TextBox.Text>
+                                <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <helper:NotEmptyValidationRule  ValidatesOnTargetUpdated="True" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="txtAmount" Grid.Column="2" FontSize="20"  Margin="5" Grid.Row="2" materialDesign:HintAssist.Hint="টাকা"
+                         Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
+                          >
+                            <TextBox.Text>
+                                <Binding Path="Amount" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <helper:NumericValidationRule  ValidatesOnTargetUpdated="True" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                            
+                        </TextBox>
+                    </Grid>
+
+
+                    <StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Center">
+                        <Button x:Name="Save" Width="100" Margin="5" Content="Save" >
+                            <Button.Style >
+                                <Style  TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">
+
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtAmount, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtName, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtDate, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtbookno, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=cmbSpendSource, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtAmount, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtReciptNo, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    
+                                </Style>
+                            </Button.Style>
+
+                        </Button>
+                        <Button x:Name="Update"  Width="100" Margin="5" Content="Update">
+                            <Button.Style >
+                                <Style  TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">
+
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtName, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtDate, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtbookno, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=cmbSpendSource, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtAmount, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtReciptNo, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+
+                                </Style>
+                            </Button.Style>
+
+                        </Button>
+                        <Button x:Name="Delete"  Width="100" Margin="5" Content="Delete">
+                            <Button.Style >
+                                <Style  TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">
+
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtName, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtDate, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtbookno, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=cmbSpendSource, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtAmount, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtReciptNo, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+
+                                </Style>
+                            </Button.Style>
+
+                        </Button>
+                    </StackPanel>
+
+                    <materialDesign:Card  Margin="5" >
+                        <TextBox x:Name="searchText"    
+                           FontSize="15" Margin="5" materialDesign:HintAssist.Hint="অনুসন্ধান-তারিখ(১/১২/২০০০),রিসিপ্ট নং,বুক নং"
+                                 FontStyle="Italic"
+                           Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
+                                 
+                          >
+                        </TextBox>
+
+                    </materialDesign:Card>
+                    <materialDesign:DialogHost IsOpen="False" x:Name="Dialog">
+                        <materialDesign:DialogHost.DialogContent>
+                            <StackPanel  Margin="20"  Orientation="Vertical">
+                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
+                                             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                             Padding="5" Width="400" Height="250"
+                                             UniformCornerRadius="6">
+                                    <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock x:Name="status" TextWrapping="Wrap" FontSize="20" Margin="0,0,10,0" />
+                                        <Button Margin="5" Width="160" Background="DarkOrange" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">Ok</Button>
+                                    </StackPanel>
+
+                                </materialDesign:Card>
+
+
+                            </StackPanel>
+
+                        </materialDesign:DialogHost.DialogContent>
+
+                    </materialDesign:DialogHost>
+
+                    <DataGrid Height="300"  Margin="5" x:Name="SpendGridName" 
+                      ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                      IsReadOnly="True"
+                      CanUserSortColumns="True" 
+                      AutoGenerateColumns="False"
+                     
+                  >
+
+                        <DataGrid.RowStyle>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="Pink"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
+                        <DataGrid.Columns>
+
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Id}"  Width="auto" Visibility="Hidden" />
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Date}" Width="auto" FontSize="17" Header="তারিখ" />
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding BookNo}" Width="auto" FontSize="17" Header="বই নং" />
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding ReciptNo}"  Width="auto" FontSize="17" Header="রিসিপ্ট নং"/>
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding VmSpendSource.Name}" Width="auto" FontSize="17" Header="ব্যায়ের খাত"/>
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Description}" Width="auto" FontSize="17" Header="ব্যায়ের বিবরণ"/>
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Name }" Width="auto" FontSize="17" Header="নাম" />
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Address }" Width="auto" FontSize="17" Header="ঠিকানা" />
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Amount}" Width="auto" FontSize="17" Header="টাকা" />
+
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+
+
+                </StackPanel>
+
+            </materialDesign:Card>
+        </GroupBox>
+
+        <!--<GroupBox  Height="300" Header="ব্যায়ের রশিদ বুক" FontSize="18" Margin="10">
+            <materialDesign:Card  Margin="5" >
+                <StackPanel Margin="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition  Height="Auto"/>
+                            <RowDefinition  Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions >
+                        <DatePicker x:Name="txtDate" Grid.Column="0" Grid.Row="0" FontSize="20" Margin="5" materialDesign:HintAssist.Hint="তারিখ"
+                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" >
+                            <DatePicker.SelectedDate>
+                                <Binding Path="Date" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </DatePicker.SelectedDate>
+                        </DatePicker>
+
+                        <TextBox  x:Name="txtbookno" Grid.Column="1" Grid.Row="0" FontSize="20" Margin="5" materialDesign:HintAssist.Hint="বুক নং"
+                          Style="{StaticResource MaterialDesignTextFieldBoxTextBox}" 
+                          >
+                            <TextBox.Text>
+                                <Binding Path="BookNo" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="txtReciptNo" Grid.Column="2" FontSize="20" Margin="5" Grid.Row="0"  materialDesign:HintAssist.Hint="রশিদ নং"
+                          Style="{StaticResource MaterialDesignTextFieldBoxTextBox}" 
+                         >
+                            <TextBox.Text >
+                                <Binding Path="ReciptNO" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+
+                        <TextBox x:Name="txtName"  Grid.Column="0" FontSize="20" Margin="5"   Grid.Row="1" Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
+                           materialDesign:HintAssist.Hint="নাম"  >
+                            <TextBox.Text>
+                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+
+                        <TextBox  x:Name="txtAddress" Grid.Column="1" FontSize="20" Grid.ColumnSpan="2"  Margin="5" Grid.Row="1"
+                             Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
+                             materialDesign:HintAssist.Hint="ঠিকানা" >
+                            <TextBox.Text>
+                                <Binding Path="Address" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox >
+
+                        <ComboBox  x:Name="cmbSpendSource" materialDesign:HintAssist.Hint="ব্যায় নির্বাচন" Grid.Column="0" FontSize="20"  Margin="5" Grid.Row="2"
+                                DisplayMemberPath="SpendSourceName"
+                                SelectedValuePath="SpendSourceId"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                            
+                            -->
+        <!--<ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Path=Id}"/>
+                                    <TextBlock Text="-"/>
+                                    <TextBlock Text="{Binding Path=IncomeSourceName}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                           
+                        </ComboBox.ItemTemplate>-->
+        <!--
+                            
+                        <ComboBox.Text>
+                            <Binding Path="SpendSoruces" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.Text>
+                    </ComboBox>
+
+                    <TextBox x:Name="txtDescription" Grid.Column="1" FontSize="20"  Margin="5" Grid.Row="2"  materialDesign:HintAssist.Hint="বিবরণ"
+                         Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
+                        >
+                        <TextBox.Text>
+                            <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                        <TextBox x:Name="txtAmount" Grid.Column="2" FontSize="20"  Margin="5" Grid.Row="2" materialDesign:HintAssist.Hint="টাকা"
+                         Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
+                          >
+                            <TextBox.Text>
+                                <Binding Path="Amount" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="Save" Width="100" Margin="5" Content="Save" Background="Brown">
+                            <Button.Style>
+                                <Style TargetType="Button" >
+
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtAddress, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtName, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                        </Button>
+                        <Button x:Name="Update" Style="{StaticResource MaterialDesignRaisedDarkButton}" IsEnabled="{Binding Path=LoginViewModel.IsAdmin}" Width="100" Margin="5" Content="Update"/>
+                        <Button x:Name="Delete" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="100" Margin="5" Content="Delete"/>
+                    </StackPanel>
+
+                    <materialDesign:DialogHost IsOpen="False" x:Name="Dialog">
+                        <materialDesign:DialogHost.DialogContent>
+                            <StackPanel  Margin="20"  Orientation="Vertical">
+                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
+                                             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                             Padding="5" Width="400" Height="250"
+                                             UniformCornerRadius="6">
+                                    <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock x:Name="status" TextWrapping="Wrap" FontSize="20" Margin="0,0,10,0" />
+                                        <Button Margin="5" Width="160" Background="DarkOrange" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">Ok</Button>
+                                    </StackPanel>
+
+                                </materialDesign:Card>
+
+
+                            </StackPanel>
+
+                        </materialDesign:DialogHost.DialogContent>
+
+                    </materialDesign:DialogHost>
+                    <materialDesign:Card  Margin="5" >
+                        <TextBox x:Name="searchText"    
+                           FontSize="20" Margin="15" materialDesign:HintAssist.Hint="Search"
+                           Style="{StaticResource MaterialDesignTextFieldBoxTextBox}" 
+                          >
+                        </TextBox>
+
+                    </materialDesign:Card>
+                    
+                    <DataGrid Height="300"  Margin="5" x:Name="SpendGridName" 
+                      ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                      IsReadOnly="True"
+                      CanUserSortColumns="True" 
+                      AutoGenerateColumns="False"
+                     
+                  >
+
+                        <DataGrid.RowStyle>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="Pink"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
+                        <DataGrid.Columns>
+
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Id}"  Width="auto" Visibility="Hidden" />
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Date}" Width="auto" FontSize="17" Header="তারিখ" />
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding BookNo}" Width="auto" FontSize="17" Header="বই নং" />
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding ReciptNo}"  Width="auto" FontSize="17" Header="রিসিপ্ট নং"/>
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding VmSpendSource.SpendSourceName}" Width="auto" FontSize="17" Header="আয় খাত"/>
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Description}" Width="auto" FontSize="17" Header="খাতের বিবরণ"/>
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Name }" Width="auto" FontSize="17" Header="নাম" />
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Address }" Width="auto" FontSize="17" Header="ঠিকানা" />
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Amount}" Width="auto" FontSize="17" Header="টাকা" />
+
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                </StackPanel>
+            </materialDesign:Card>
+        </GroupBox>-->
+
+
+        <!--<StackPanel x:Name="Main">
+            <GroupBox  Height="300" Header="ব্যায়ের রশিদ বুক" FontSize="18" Margin="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition  Height="Auto"/>
+                        <RowDefinition  Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions >
+
+
+                    <DatePicker x:Name="txtDate" Grid.Column="0" Grid.Row="0" FontSize="20" Margin="5" materialDesign:HintAssist.Hint="তারিখ"
+                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" >
+                        <DatePicker.SelectedDate>
+                            <Binding Path="Date" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </DatePicker.SelectedDate>
+                    </DatePicker>
+
+                    <TextBox  x:Name="txtbookno" Grid.Column="1" Grid.Row="0" FontSize="20" Margin="5" materialDesign:HintAssist.Hint="বুক নং"
+                          Style="{StaticResource MaterialDesignTextFieldBoxTextBox}" 
+                          >
+                        <TextBox.Text>
+                            <Binding Path="BookNo" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <TextBox x:Name="txtReciptNo" Grid.Column="2" FontSize="20" Margin="5" Grid.Row="0"  materialDesign:HintAssist.Hint="রশিদ নং"
+                          Style="{StaticResource MaterialDesignTextFieldBoxTextBox}" 
+                         >
+                        <TextBox.Text >
+                            <Binding Path="ReciptNO" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <TextBox x:Name="txtName"  Grid.Column="0" FontSize="20" Margin="5"   Grid.Row="1" Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
+                           materialDesign:HintAssist.Hint="নাম"  >
+                        <TextBox.Text>
+                            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <TextBox  x:Name="txtAddress" Grid.Column="1" FontSize="20" Grid.ColumnSpan="2"  Margin="5" Grid.Row="1"
+                             Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
+                             materialDesign:HintAssist.Hint="ঠিকানা" >
+                        <TextBox.Text>
+                            <Binding Path="Address" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox >
+
+
+                    <ComboBox  x:Name="cmbSpendSource" materialDesign:HintAssist.Hint="ব্যায় নির্বাচন" Grid.Column="0" FontSize="20"  Margin="5" Grid.Row="2"
+                                DisplayMemberPath="SpendSourceName"
+                                SelectedValuePath="SpendSourceId"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                        -->
+        <!--<ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Path=Id}"/>
+                                    <TextBlock Text="-"/>
+                                    <TextBlock Text="{Binding Path=IncomeSourceName}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                           
+                        </ComboBox.ItemTemplate>-->
+        <!--
+                        <ComboBox.Text>
+                            <Binding Path="SpendSoruces" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.Text>
+                    </ComboBox>
+
+                    <TextBox x:Name="txtDescription" Grid.Column="1" FontSize="20"  Margin="5" Grid.Row="2"  materialDesign:HintAssist.Hint="বিবরণ"
+                         Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
+                        >
+                        <TextBox.Text>
+                            <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <TextBox x:Name="txtAmount" Grid.Column="2" FontSize="20"  Margin="5" Grid.Row="2" materialDesign:HintAssist.Hint="টাকা"
+                         Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
+                          >
+                        <TextBox.Text>
+                            <Binding Path="Amount" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <Helper:NotEmptyValidationRule
+                                    ValidatesOnTargetUpdated="True" xmlns:Helper="clr-namespace:TruckDriver.Desktop.Helper" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Grid>
+
+            </GroupBox>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="Save" Width="100" Margin="5" Content="Save" Background="Brown">
+                    <Button.Style>
+                        <Style TargetType="Button" >
+
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text.Length, ElementName=txtAddress, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Text.Length, ElementName=txtName, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                </Button>
+                <Button x:Name="Update" Style="{StaticResource MaterialDesignRaisedDarkButton}" IsEnabled="{Binding Path=LoginViewModel.IsAdmin}" Width="100" Margin="5" Content="Update"/>
+                <Button x:Name="Delete" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="100" Margin="5" Content="Delete"/>
+            </StackPanel>
+            <materialDesign:DialogHost IsOpen="False" x:Name="Dialog">
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel  Margin="20"  Orientation="Vertical">
+                        <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
+                                             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                             Padding="5" Width="400" Height="250"
+                                             UniformCornerRadius="6">
+                            <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock x:Name="status" TextWrapping="Wrap" FontSize="20" Margin="0,0,10,0" />
+                                <Button Margin="5" Width="160" Background="DarkOrange" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">Ok</Button>
+                            </StackPanel>
+
+                        </materialDesign:Card>
+
+
+                    </StackPanel>
+
+                </materialDesign:DialogHost.DialogContent>
+
+            </materialDesign:DialogHost>
+            <TextBox x:Name="searchText"    
+                           FontSize="20" Margin="15" materialDesign:HintAssist.Hint="Search"
+                           Style="{StaticResource MaterialDesignTextFieldBoxTextBox}" 
+                          >
+            </TextBox>
+
+            <DataGrid Height="300"  Margin="5" x:Name="SpendGridName" 
+                      ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                      IsReadOnly="True"
+                      CanUserSortColumns="True" 
+                      AutoGenerateColumns="False"
+                     
+                  >
+
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="Pink"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Id}"  Width="auto" Visibility="Hidden" />
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Date}" Width="auto" FontSize="17" Header="তারিখ" />
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding BookNo}" Width="auto" FontSize="17" Header="বই নং" />
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding ReciptNo}"  Width="auto" FontSize="17" Header="রিসিপ্ট নং"/>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding VmSpendSource.SpendSourceName}" Width="auto" FontSize="17" Header="আয় খাত"/>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Description}" Width="auto" FontSize="17" Header="খাতের বিবরণ"/>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Name }" Width="auto" FontSize="17" Header="নাম" />
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Address }" Width="auto" FontSize="17" Header="ঠিকানা" />
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Amount}" Width="auto" FontSize="17" Header="টাকা" />
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+            <materialDesign:Chip Content="Subrata Roy @ roy.subrata.cs@gmail.com" Margin="5" VerticalAlignment="Bottom" HorizontalAlignment="Center" >
+                -->
+        <!--<materialDesign:Chip.Icon>
+                   
+                </materialDesign:Chip.Icon>-->
+        <!--
+            </materialDesign:Chip>
+
+            <materialDesign:Chip Margin="0,0,0,10" VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="01716625369" 
+                                 IconBackground="{DynamicResource PrimaryHueDarkBrush}"
+                                 IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+                <materialDesign:Chip.Icon>
+                    <materialDesign:PackIcon Kind="Phone"></materialDesign:PackIcon>
+                </materialDesign:Chip.Icon>
+            </materialDesign:Chip>
+
+        </StackPanel>-->
+    </ScrollViewer>
+</UserControl>

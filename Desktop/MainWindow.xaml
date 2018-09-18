@@ -1,0 +1,96 @@
+﻿<Window x:Class="Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Desktop"
+        mc:Ignorable="d"
+        KeyDown="Window_KeyDown"
+        WindowStartupLocation="CenterScreen"
+        Title="বাংলাদেশ ট্রাক ও কভার্ড ভ্যান ড্রাইভার্স ইউনিয়ন" Height="600" Width="500"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStyle="ToolWindow">
+    <Grid>
+
+        <!--Title-->
+        <StackPanel Orientation="Vertical" >
+            <TextBlock  Margin="0,15,0,0" FontSize="20" Foreground="#5d2199" FontWeight="Bold" TextAlignment="Center" Text="বাংলাদেশ ট্রাক ও কভার্ড ভ্যান ড্রাইভার্স ইউনিয়ন"/>
+            <TextBlock  FontSize="15" TextAlignment="Center"  Foreground="#5d2199" FontWeight="Bold" Text="রেজিঃ নং ৬২৩"/>
+            <TextBlock  FontSize="15" TextAlignment="Center"  Foreground="#5d2199" FontWeight="Bold" Text="মধুপুর শাখা,মধুপুর টাঙ্গাইল"/>
+        </StackPanel>
+
+        <!--Login Card-->
+        <materialDesign:Card VerticalAlignment="Center" Margin="20">
+            <StackPanel Orientation="Vertical" Margin="20" >
+                <Image Source="Sources/login.png" Height="92" />
+                <materialDesign:PackIcon Kind="Account" Width="40" Height="40" />
+                <TextBox x:Name="txtUserName" materialDesign:HintAssist.Hint="User Name" FontStyle="Italic" Height="40"  FontSize="18" />
+                <materialDesign:PackIcon Kind="Lastpass" Width="40" Height="40" Margin="0,10,0,0"/>
+                <PasswordBox x:Name="txtPassword" materialDesign:HintAssist.Hint="Password"  FontStyle="Italic"  FontSize="18" Height="40" />
+                <Button x:Name="btnLogin" Content="Log In" Margin="0,10,0,0" FontSize="20" VerticalAlignment="Center" Height="40" Width="140" >
+                    <Button.Style>
+                        <Style TargetType="Button"  BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">
+
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text.Length, ElementName=txtUserName, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+        </materialDesign:Card>
+
+        <!--Dialog Popup box-->
+        <materialDesign:DialogHost IsOpen="False" x:Name="Dialog">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel x:Name="dbSetPanel" MinHeight="150" Width="350" Height="100" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Vertical">
+                    <materialDesign:PackIcon Kind="MessageAlert" />
+                    <TextBlock x:Name="status" Margin="8"  FontSize="16" TextWrapping="Wrap"></TextBlock>
+
+                    <Button  Width="80"   Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">Ok</Button>
+                </StackPanel>
+
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        <materialDesign:DialogHost IsOpen="False" x:Name="DbSettingDialog">
+
+            <materialDesign:DialogHost.DialogContent>
+
+                <GroupBox Header="ডাটাবেস সেটআপ" FontSize="15">
+                    <materialDesign:Card>
+                        <StackPanel  Width="400" Height="auto" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Vertical">
+                            <ComboBox x:Name="cbmServer"  Height="40"  FontSize="12" Margin="10" materialDesign:HintAssist.Hint="Server Name"></ComboBox>
+                            <TextBox x:Name="txtDatabase" Height="40"  FontSize="12" Margin="10" materialDesign:HintAssist.Hint="DataBase Name"></TextBox>
+                            <TextBox x:Name="txtuerName"  Height="40"  FontSize="12" Margin="10" materialDesign:HintAssist.Hint="User Name"></TextBox>
+                            <TextBox x:Name="txtpassWord" Height="40"  FontSize="12" Margin="10" materialDesign:HintAssist.Hint="Password"></TextBox>
+                            <StackPanel Orientation="Horizontal">
+                                <Button  Width="100" Margin="5" Click="Button_Click">Save</Button>
+                                <Button  Width="100"  Margin="5" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">Cancel</Button>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </materialDesign:Card>
+                </GroupBox>
+
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        <materialDesign:Chip Content="Subrata Roy,roy.subrata.cs@gmail.com,+8801716625369" Margin="10"  VerticalAlignment="Bottom" HorizontalAlignment="Center"   >
+            <materialDesign:Chip.Icon>
+                <Image Source="Sources/profile.jpg"></Image>
+            </materialDesign:Chip.Icon>
+        </materialDesign:Chip>
+
+
+
+    </Grid>
+
+</Window>

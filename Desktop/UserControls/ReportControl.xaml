@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="Desktop.UserControls.ReportControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Desktop.UserControls"
+             xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:helper="clr-namespace:Desktop.Helper"
+             mc:Ignorable="d" 
+            >
+    <ScrollViewer>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="400" />
+             
+            </Grid.ColumnDefinitions>
+
+            <viewer:CrystalReportsViewer  Grid.Column="0" x:Name="reportViewer"   />
+            <StackPanel Grid.Column="1">
+              
+
+                    <StackPanel   Margin="20,20,20,0" Orientation="Vertical">
+                        <TextBlock  Margin="0,10,0,0" FontSize="15" Foreground="Black" x:Name="typeReport" Text="রিপোর্ট"/>
+                    <ComboBox FontSize="15" Foreground="Black" x:Name="cmbreportType">
+                        <ComboBoxItem  Content = "আয়" />
+                        <ComboBoxItem Content = "ব্যায়" />
+                        <ComboBox.SelectedValue>
+                            <Binding Path="ReportType" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <helper:NotEmptyValidationRule  ValidatesOnTargetUpdated="True" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.SelectedValue>
+                    </ComboBox>
+                    <TextBlock  Margin="0,10,0,0" FontSize="15" Foreground="Black" x:Name="txtSourceName" Text="খাত"/>
+                    <ComboBox FontSize="15" Foreground="Black" x:Name="cmbSourceName">
+                        <ComboBox.SelectedValue>
+                            <Binding Path="SourceName" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <helper:NotEmptyValidationRule  ValidatesOnTargetUpdated="True" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.SelectedValue>
+                     
+                    </ComboBox>
+                    <CheckBox x:Name="GroupBy" Content="খাত অনুসারে"/>
+
+
+                    <TextBlock  Margin="0,10,0,0" FontSize="15" Foreground="Black" x:Name="from" Text="হতে"/>
+                        <DatePicker  Margin="0,10,0,0" FontSize="15" Foreground="Black" x:Name="txtFromDate" />
+                        <TextBlock  Margin="0,10,0,0" FontSize="15" Foreground="Black" x:Name="to" Text="পর্যন্ত"/>
+                        <DatePicker  Margin="0,10,0,0"  FontSize="15" Foreground="Black" x:Name="txtToDate" />
+                    <Button  Margin="0,10,0,0" Content="রিপোর্ট  দেখানো " x:Name="btnReport" >
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" >
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text.Length, ElementName=cmbreportType, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Text.Length, ElementName=cmbSourceName, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </DataTrigger>
+                                    
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <materialDesign:Card Margin="10">
+                        <StackPanel>
+                            <TextBlock Text="ডাটাবেস ব্যাকআপ সংরক্ষণ" HorizontalAlignment="Center" Foreground="Brown" FontSize="18"></TextBlock>
+                            <TextBox x:Name="txtPath" Margin="5" materialDesign:HintAssist.Hint="লোকেশন নির্বাচন"></TextBox>
+                            <Button x:Name="browse" Content="লোকেশন নির্বাচন" Margin="5" />
+                            <Button x:Name="backup" Content="ব্যাকআপ" Margin="5" />
+                        </StackPanel>
+                    </materialDesign:Card>
+                    <materialDesign:DialogHost IsOpen="False" x:Name="Dialog">
+                        <materialDesign:DialogHost.DialogContent>
+                            <StackPanel MinWidth="350" MinHeight="100" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Vertical">
+                                <materialDesign:PackIcon Kind="MessageAlert" />
+                                <TextBlock x:Name="status" Margin="8"  FontSize="16" TextWrapping="Wrap"></TextBlock>
+
+                                <Button  Width="80"   Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">Ok</Button>
+                            </StackPanel>
+
+                        </materialDesign:DialogHost.DialogContent>
+                    </materialDesign:DialogHost>
+                </StackPanel>
+
+            </StackPanel>
+           
+        </Grid>
+
+    </ScrollViewer>
+
+</UserControl>
